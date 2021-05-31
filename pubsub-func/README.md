@@ -1,0 +1,1 @@
+cloud functions deploy  MyFunctionTutorial --trigger-topic <TOPIC_NAME> --runtime go113
