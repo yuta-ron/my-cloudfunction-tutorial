@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	function "github.com/yuta-ron/my-cloudfunction-tutorial.git"
+	function "github.com/yuta-ron/my-cloudfunction-tutorial/http-func"
 )
 
 func main() {
