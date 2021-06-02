@@ -2,11 +2,11 @@ name: deploy_functions
 
 on: 
   workflow_dispatch:
-  inputs:
-    name: 
-      description: 'deploy target'
-      required: true
-      default: 'dev'
+    inputs:
+      name: 
+        description: 'deploy target'
+        required: true
+        default: 'dev'
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -24,5 +24,4 @@ jobs:
       run: | 
         cd http-func
         gcloud functions deploy  MyFunctionTutorial --trigger-http --runtime go113
-
-
+        
