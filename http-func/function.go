@@ -1,16 +1,37 @@
-package function
+// Package p contains an HTTP Cloud Function.
+package p
 
 import (
+	"encoding/json"
 	"fmt"
+	"html"
+	"io"
 	"log"
 	"net/http"
 )
 
-// MyFunctionTutorial is sample functions
+// MyFunctionTutorial prints the JSON encoded "message" field in the body
+// of the request or "Hello, World!" if there isn't one.
 func MyFunctionTutorial(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-	fmt.Println("Hello by fmt pkg")
-	log.Println("Hello by log pkg")
-	// w.Write([]byte(r.Header.Get("X-Forwarded-For")))
-	w.Write([]byte("Hello"))
+	var d struct {
+		Message string `json:"message"`
+	}
+
+	if err := json.NewDecoder(r.Body).Decode(&d); err != nil {
+		switch err {
+		case io.EOF:
+			fmt.Fprint(w, "Hello World! From http-func")
+			return
+		default:
+			log.Printf("json.NewDecoder: %v", err)
+			http.Error(w, http.StatusText(http.StatusBadRequest), http.StatusBadRequest)
+			return
+		}
+	}
+
+	if d.Message == "" {
+		fmt.Fprint(w, "Hello World! From http-func nothing ver")
+		return
+	}
+	fmt.Fprint(w, html.EscapeString(d.Message))
 }
