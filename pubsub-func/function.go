@@ -15,6 +15,6 @@ type PubSubMessage struct {
 
 // HelloPubSub consumes a Pub/Sub message.
 func MyScheduledFunction(ctx context.Context, m PubSubMessage) error {
-	log.Println(string("scheduled function")))
+	log.Println(string("scheduled function"))
 	return nil
 }
