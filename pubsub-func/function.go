@@ -1,4 +1,5 @@
 // Package p contains a Pub/Sub Cloud Function.
+// Package p contains a Pub/Sub Cloud Function.
 package p
 
 import (
@@ -14,6 +15,6 @@ type PubSubMessage struct {
 
 // HelloPubSub consumes a Pub/Sub message.
 func MyScheduledFunction(ctx context.Context, m PubSubMessage) error {
-	log.Println(string(m.Data))
+	log.Println(string("scheduled function")))
 	return nil
 }
